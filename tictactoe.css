@@ -7,8 +7,8 @@
     align-items: center;
     font-family: Arial, sans-serif;
     overflow: hidden;
-    padding: clamp(16px, 3vmin, 40px);
-    gap: clamp(12px, 3vmin, 28px);
+    padding: clamp(8px, 2vmin, 20px);
+    gap: clamp(6px, 1.5vmin, 12px);
     position: relative;
     isolation: isolate;
 }
@@ -39,7 +39,7 @@ body::after {
 
 #titleBlock {
     width: min(90vw, 520px);
-    min-height: clamp(90px, 14vmin, 180px);
+    min-height: clamp(60px, 10vmin, 120px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -99,7 +99,7 @@ h1 {
 }
 
 #scoreboard {
-    margin-top: 50px;
+    margin-top: clamp(8px, 2vmin, 20px);
     display: flex;
     gap: clamp(16px, 4vmin, 36px);
     font-size: clamp(16px, 3.2vmin, 28px);
@@ -181,7 +181,7 @@ button:hover {
 .X-right {
     width: calc(var(--cell-size) * 0.08);
     height: calc(var(--cell-size) * 0.78);
-    transform: rotate(270deg);
+    transform: rotate(-45deg);
     background-color: #A63D40;
 }
 
