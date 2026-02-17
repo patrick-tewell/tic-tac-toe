@@ -2,9 +2,9 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
     <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="StyleSheet1.css" />
+    <link rel="stylesheet" href="tictactoe.css" />
 </head>
 <body>
     <div id="titleBlock">
@@ -22,7 +22,10 @@
         <button id="B-BM" class="buttonSquare" value="B-BM"></button>
         <button id="B-BR" class="buttonSquare" value="B-BR"></button>
     </div>
-    <button id="reset">Reset</button>
-    <script src="main.js"></script>
+    <div id="scoreboard">
+        <span class="score-item score-x">X: <span id="scoreX">0</span></span>
+        <span class="score-item score-o">O: <span id="scoreO">0</span></span>
+    </div>
+    <script src="tictactoe.js"></script>
 </body>
 </html>

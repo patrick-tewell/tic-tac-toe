@@ -1,4 +1,15 @@
-﻿body {
+﻿#bg-x-canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+
+body {
     background-color: #001524;
     min-height: 100svh;
     display: flex;
@@ -62,22 +73,25 @@ h1 {
 }
 
 
+
 #grid {
     --grid-frame-color: #15616D;
+    background-color: #001524;
     display: grid;
     grid-template-areas: "a a a"
         "a a a"
         "a a a";
     grid-gap: var(--grid-gap);
-    padding: calc(var(--grid-padding) + (var(--grid-border-win) - var(--grid-border)));
+    padding: var(--grid-padding);
     border-style: solid;
-    border-width: var(--grid-border-win);
+    border-width: var(--grid-border);
     border-radius: var(--cell-radius);
-    border-color: transparent;
+    border-color: var(--grid-frame-color);
     color: var(--grid-frame-color);
     box-sizing: border-box;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    transition: border-color 0.4s, box-shadow 0.4s;
 }
 
 #grid::before {
@@ -90,8 +104,8 @@ h1 {
 }
 
 #grid.is-finished {
+    box-shadow: 0 0 0 8px rgba(200, 150, 62, 0.25), 0 0 24px 4px var(--grid-frame-color);
     border-color: var(--grid-frame-color);
-    border-style: double;
 }
 
 #grid.is-finished::before {
@@ -102,7 +116,7 @@ h1 {
     margin-top: clamp(8px, 2vmin, 20px);
     display: flex;
     gap: clamp(16px, 4vmin, 36px);
-    font-size: clamp(16px, 3.2vmin, 28px);
+    font-size: clamp(16px, 3.2vmin, 38px);
     letter-spacing: 0.04em;
     position: relative;
     z-index: 1;
@@ -137,7 +151,9 @@ h1 {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 5;
+    z-index: 3;
+    background: #001524;
+    box-shadow: 0 0 0 8px #001524;
 }
 
 button:hover {
@@ -171,17 +187,22 @@ button:hover {
     background-color: #001524;
 }
 
-.X-left {
-    width: calc(var(--cell-size) * 0.08);
+
+.X-left, .X-right {
+    width: calc(var(--cell-size) * 0.10);
     height: calc(var(--cell-size) * 0.78);
-    transform: rotate(45deg);
     background-color: #A63D40;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: center center;
+    border-radius: calc(var(--cell-size) * 0.04);
 }
 
+.X-left {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
 .X-right {
-    width: calc(var(--cell-size) * 0.08);
-    height: calc(var(--cell-size) * 0.78);
-    transform: rotate(-45deg);
-    background-color: #A63D40;
+    transform: translate(-50%, -50%) rotate(90deg);
 }
 
