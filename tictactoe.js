@@ -1,8 +1,6 @@
-// ...existing code...
 let animationFrameId = null;
 
 function animateBackground() {
-    // Remove any existing animation frame
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
         animationFrameId = null;
@@ -18,12 +16,10 @@ function animateBackground() {
     const fadeStep = 0.01;
     let offsetX = 0;
     let offsetY = 0;
-    const moveSpeed = 0.7; // px per frame
+    const moveSpeed = 0.7;
     function step() {
-        // Move offset down and left
         offsetX -= moveSpeed;
         offsetY += moveSpeed;
-        // Wrap offset to keep it in [0, tile*4)
         const dpr = window.devicePixelRatio || 1;
         const tile = 80 * dpr;
         offsetX = ((offsetX % (tile * 4)) + (tile * 4)) % (tile * 4);
@@ -63,8 +59,8 @@ function drawXBackground() {
         document.body.prepend(canvas);
     }
     const ctx = canvas.getContext('2d');
-    // Set canvas size to viewport
     const dpr = window.devicePixelRatio || 1;
+    
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = window.innerWidth + 'px';
@@ -76,10 +72,13 @@ function drawXBackground() {
     const tile = 80 * dpr;
     const xColor = '#4682B4';
     const bgColor = '#001524';
+    
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
     let row = 0;
     const offset = drawXBackground.offset || {x: 0, y: 0};
+    
     for (let y = -tile * 4 + offset.y; y < canvas.height + tile * 4; y += tile * 2, row++) {
         for (let x = -tile * 4 + offset.x; x < canvas.width + tile * 4; x += tile * 4) {
             if (row % 2 === 0) {
@@ -99,8 +98,8 @@ function drawOBackground() {
         document.body.prepend(canvas);
     }
     const ctx = canvas.getContext('2d');
-    // Set canvas size to viewport
     const dpr = window.devicePixelRatio || 1;
+    
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = window.innerWidth + 'px';
@@ -112,10 +111,13 @@ function drawOBackground() {
     const tile = 80 * dpr;
     const xColor = '#4682B4';
     const bgColor = '#001524';
+    
     ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
     let row = 0;
     const offset = drawOBackground.offset || {x: 0, y: 0};
+    
     for (let y = -tile * 4 + offset.y; y < canvas.height + tile * 4; y += tile * 2, row++) {
         for (let x = -tile * 4 + offset.x; x < canvas.width + tile * 4; x += tile * 4) {
             if (row % 2 === 0) {
@@ -162,8 +164,7 @@ window.addEventListener('DOMContentLoaded', () => {
     animateBackground();
 });
 
-// Set up variables
-
+// Set-up variables
 let inputButton = document.getElementsByClassName("buttonSquare");
 let winnerDisplay = document.getElementById("winner");
 let gridDisplay = document.getElementById("grid");
@@ -179,7 +180,6 @@ let scoreX = 0;
 let scoreO = 0;
 
 // Winning sets:
-
 const leftVerticalWinner = ["TL", "ML", "BL"];
 const midVerticalWinner = ["TM", "MM", "BM"];
 const rightVerticalWinner = ["TR", "MR", "BR"];
@@ -192,7 +192,6 @@ const leftDiagonalWinner = ["TL", "MM", "BR"];
 const rightDiagonalWinner = ["TR", "MM", "BL"];
 
 // Add click events to each playable button
-
 for (let i = 0; i < inputButton.length; i++) {
     inputButton[i].addEventListener("click", () => {
         if (gameOver) {
@@ -211,7 +210,6 @@ document.addEventListener("click", () => {
 });
 
 // Mark square with either X or O and update variables for next turn
-
 function markSquare(inputSquare) {
     let input = inputSquare.slice(2);
 
@@ -309,7 +307,7 @@ function checkWinner() {
 }
 
 function resetGame() {
-    removeWinningLine(); // Remove winning line immediately
+    removeWinningLine();
     count = 0;
     winningX = [];
     winningO = [];
@@ -347,17 +345,19 @@ function drawWinningLine(winner, squares) {
     const ctx = canvas.getContext('2d');
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Get DOM positions of first and last winning square
+
     const first = document.getElementById('B-' + squares[0]);
     const last = document.getElementById('B-' + squares[2]);
+    
     if (!first || !last) return;
+    
     const rect1 = first.getBoundingClientRect();
     const rect2 = last.getBoundingClientRect();
-    // Center points
     const x1 = (rect1.left + rect1.width / 2) * dpr;
     const y1 = (rect1.top + rect1.height / 2) * dpr;
     const x2 = (rect2.left + rect2.width / 2) * dpr;
     const y2 = (rect2.top + rect2.height / 2) * dpr;
+    
     ctx.save();
     ctx.strokeStyle = winner === 'X' ? '#A63D40' : '#CFFFB3';
     ctx.lineWidth = 10 * dpr;
